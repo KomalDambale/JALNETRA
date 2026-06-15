@@ -53,12 +53,14 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
-# Add here
 if "otp" not in st.session_state:
     st.session_state.otp = ""
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
+
+if "otp_sent" not in st.session_state:
+    st.session_state.otp_sent = False
 
 if "page" not in st.session_state:
     st.session_state.page = "landing"
@@ -132,14 +134,13 @@ def get_email_credentials() -> tuple[str, str]:
 
 
 def send_otp(receiver_email: str) -> bool:
-
-    st.session_state.otp_sent = True
-    return True
     otp = str(random.randint(100000, 999999))
     st.session_state.otp = otp
     st.session_state.otp_sent = False
     st.session_state.user_email = receiver_email
     email_address, email_password = get_email_credentials()
+    st.write("EMAIL =", email_address)
+    st.write("PASSWORD FOUND =", bool(email_password))
     if not email_address or not email_password:
         st.error(
             "Email OTP is not configured. Add credentials to .streamlit/secrets.toml"
@@ -154,17 +155,24 @@ def send_otp(receiver_email: str) -> bool:
     message["From"] = email_address
     message["To"] = receiver_email
     try:
+        st.write("EMAIL:", email_address)
+        st.write("PASSWORD EXISTS:", bool(email_password))
+
         with smtplib.SMTP("smtp.gmail.com", 587, timeout=20) as server:
+            st.write("SMTP Connected")
             server.starttls()
+            st.write("TLS Started")
             server.login(email_address, email_password)
+            st.write("Login Success")
             server.sendmail(email_address, receiver_email, message.as_string())
+        st.write("Mail Sent")
+
         st.session_state.otp_sent = True
         return True
-    except smtplib.SMTPAuthenticationError:
-        st.error("Email login failed. Use a valid Gmail App Password.")
-        return False
+
     except Exception as exc:
-        st.error(f"Email could not be sent: {exc}")
+        st.error(f"ERROR TYPE: {type(exc).__name__}")
+        st.error(f"ERROR: {exc}")
         return False
 
 
