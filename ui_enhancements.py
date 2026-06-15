@@ -185,49 +185,67 @@ def forecast_kpi_cards(stage: float, category: str, confidence: float) -> str:
 # ── 7. PLOTLY CHART THEME ──────────────────────────────────────
 # Add this helper to visualization.py and wrap every fig with it:
 
+
 PLOTLY_THEME = dict(
     template="plotly_white",
     font=dict(
-    family="Inter, sans-serif",
-    color="#000000",
-    size=13
-)
+        family="Inter, sans-serif",
+        color="#000000",
+        size=13,
+    ),
     paper_bgcolor="#FFFFFF",
     plot_bgcolor="#FFFFFF",
-    margin=dict(l=16, r=16, t=48, b=16),
+    margin=dict(
+        l=16,
+        r=16,
+        t=48,
+        b=16,
+    ),
     title=dict(
-        font=dict(family="Space Grotesk, sans-serif", size=18, color="#000000"),
+        font=dict(
+            family="Space Grotesk, sans-serif",
+            size=18,
+            color="#000000",
+        ),
         x=0.02,
         xanchor="left",
     ),
     legend=dict(
-    bgcolor="#FFFFFF",
-    bordercolor="#94A3B8",
-    borderwidth=1,
-    font=dict(
-        size=12,
-        color="#000000"
+        bgcolor="#FFFFFF",
+        bordercolor="#94A3B8",
+        borderwidth=1,
+        font=dict(
+            size=12,
+            color="#000000",
+        ),
     ),
     xaxis=dict(
         showgrid=True,
-        gridcolor="#CBD5E1"
+        gridcolor="#CBD5E1",
         gridwidth=1,
         zeroline=False,
-        tickfont=dict(size=12, color="#000000"),
+        tickfont=dict(
+            size=12,
+            color="#000000",
+        ),
     ),
     yaxis=dict(
         showgrid=True,
-        gridcolor="#CBD5E1"
+        gridcolor="#CBD5E1",
         gridwidth=1,
         zeroline=False,
-        tickfont=dict(size=12, color="#000000"),
+        tickfont=dict(
+            size=12,
+            color="#000000",
+        ),
+    ),
     colorway=[
-    "#0284C7",  # Blue
-    "#10B981",  # Green
-    "#F59E0B",  # Orange
-    "#EF4444",  # Red
-    "#7C3AED",  # Purple
-]
+        "#0284C7",  # Blue
+        "#10B981",  # Green
+        "#F59E0B",  # Orange
+        "#EF4444",  # Red
+        "#7C3AED",  # Purple
+    ],
 )
 
 # Usage: fig.update_layout(**PLOTLY_THEME)
