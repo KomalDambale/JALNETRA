@@ -53,6 +53,15 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
+# Add here
+if "otp" not in st.session_state:
+    st.session_state.otp = ""
+
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
+if "page" not in st.session_state:
+    st.session_state.page = "landing"
 st.markdown(
     """
 <script>
@@ -123,7 +132,7 @@ def get_email_credentials() -> tuple[str, str]:
 
 
 def send_otp(receiver_email: str) -> bool:
-    st.session_state.otp = "123456"
+
     st.session_state.otp_sent = True
     return True
     otp = str(random.randint(100000, 999999))
@@ -341,6 +350,7 @@ def login_page() -> None:
                 if otp == st.session_state.otp:
                     st.session_state.logged_in = True
                     navigate("dashboard")
+                    st.rerun()
                 else:
                     st.error("Invalid OTP")
         with signup_tab:
@@ -354,6 +364,7 @@ def login_page() -> None:
                 if signup_otp == st.session_state.otp:
                     st.session_state.logged_in = True
                     navigate("dashboard")
+                    st.rerun()
                 else:
                     st.error("Invalid OTP")
 
