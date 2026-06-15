@@ -139,8 +139,8 @@ def send_otp(receiver_email: str) -> bool:
     st.session_state.otp_sent = False
     st.session_state.user_email = receiver_email
     email_address, email_password = get_email_credentials()
-    st.write("EMAIL =", email_address)
-    st.write("PASSWORD FOUND =", bool(email_password))
+    # st.write("EMAIL =", email_address)
+    # st.write("PASSWORD FOUND =", bool(email_password))
     if not email_address or not email_password:
         st.error(
             "Email OTP is not configured. Add credentials to .streamlit/secrets.toml"
@@ -159,13 +159,13 @@ def send_otp(receiver_email: str) -> bool:
         st.write("PASSWORD EXISTS:", bool(email_password))
 
         with smtplib.SMTP("smtp.gmail.com", 587, timeout=20) as server:
-            st.write("SMTP Connected")
+            # st.write("SMTP Connected")
             server.starttls()
-            st.write("TLS Started")
+            # st.write("TLS Started")
             server.login(email_address, email_password)
-            st.write("Login Success")
+            # st.write("Login Success")
             server.sendmail(email_address, receiver_email, message.as_string())
-        st.write("Mail Sent")
+        # st.write("Mail Sent")
 
         st.session_state.otp_sent = True
         return True

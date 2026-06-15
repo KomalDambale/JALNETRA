@@ -63,6 +63,11 @@ def trend_chart(df: pd.DataFrame, metrics: list[str], title: str):
 
     fig.update_xaxes(type="category")
     fig.update_layout(**PLOTLY_THEME)
+    fig.update_layout(
+        paper_bgcolor="white",
+        plot_bgcolor="white",
+        font=dict(color="#111111"),
+    )
 
     return fig
 
@@ -172,7 +177,11 @@ def forecast_chart(
     )
     fig.update_xaxes(type="category")
     fig.update_layout(**PLOTLY_THEME)
-    fig.update_layout(height=480)
+    fig.update_layout(
+        paper_bgcolor="white",
+        plot_bgcolor="white",
+        font=dict(color="#111111"),
+    )
     return fig
 
 
@@ -200,7 +209,11 @@ def multi_metric_forecast_chart(forecast: pd.DataFrame, entity: str):
     )
     fig.update_xaxes(type="category")
     fig.update_layout(**PLOTLY_THEME)
-    fig.update_layout(height=520)
+    fig.update_layout(
+        paper_bgcolor="white",
+        plot_bgcolor="white",
+        font=dict(color="#111111"),
+    )
     return fig
 
 
@@ -216,7 +229,11 @@ def risk_heatmap(risk_df: pd.DataFrame):
     )
     fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
     fig.update_layout(**PLOTLY_THEME)
-    fig.update_layout(height=560, xaxis_tickangle=-45)
+    fig.update_layout(
+        paper_bgcolor="white",
+        plot_bgcolor="white",
+        font=dict(color="#111111"),
+    )
     return fig
 
 
@@ -252,5 +269,9 @@ def stage_gauge(stage: float, title: str = "Extraction Stage"):
             },
         )
     )
-    fig.update_layout(height=320)
+    fig.update_layout(
+        paper_bgcolor="white",
+        plot_bgcolor="white",
+        font=dict(color="#111111"),
+    )
     return fig
