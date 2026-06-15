@@ -269,7 +269,6 @@ section[data-testid="stSidebar"]{
 
 
 def login_page() -> None:
-    st.markdown(LOGIN_CARD, unsafe_allow_html=True)
     st.markdown(
         """
         <style>
